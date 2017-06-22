@@ -54,7 +54,15 @@ class Welcome extends CI_Controller {
 		else $dbPassword = trim($this->input->post("dbPassword"));
 		
 		$done = self::install($serverAddress,$dbName,$dbUsername,$dbPassword);
-		echo $done;
+		if($done)
+		{
+			 redirect('/welcome', 'index');
+		}
+		else
+		{
+			die("Error occured during installation");
+		}
+
 
 	}
 
@@ -68,32 +76,18 @@ class Welcome extends CI_Controller {
             $c->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
          	$sql=file_get_contents("custom/tables.sql");
            	$c->exec($sql);
-       
             $f=fopen("custom/DatabaseConnection.php","w");
             fputs($f,"<"."?"."php\r\n");
             fputs($f,"class DatabaseConnection\r\n");
             fputs($f,"{\r\n");
-            fputs($f," public static function getConnection()\r\n");
-            fputs($f," {\r\n");
-            fputs($f," $"."c=null;\r\n");
-            fputs($f," try\r\n");
-            fputs($f," {\r\n");
-            fputs($f," $"."c=new PDO(\"mysql:host=$serverName;dbname=$databaseName\",\"$username\",\"$password\");\r\n");
-            fputs($f," $"."c->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);\r\n");
-            fputs($f," }catch(PDOException $"."pe)\r\n");
-            fputs($f," {\r\n");
-            fputs($f," return null;\r\n");
-            fputs($f," }\r\n");
-            fputs($f," catch(Exception $"."e)\r\n");
-            fputs($f," {\r\n");
-            fputs($f," return null;\r\n");
-            fputs($f," }\r\n");
-            fputs($f," return $"."c;\r\n");
-            fputs($f," }\r\n");
+            fputs($f," public "."$"."serverAddress = ".$serverName.";\r\n");
+            fputs($f," public "."$"."dbName = ".$databaseName.";\r\n");
+            fputs($f," public "."$"."dbUsername = ".$username.";\r\n");
+            fputs($f," public "."$"."dbPassword = ".$password.";\r\n");
             fputs($f,"}\r\n");
             fputs($f,"?".">");
             fclose($f);
-			while(!file_exists("DatabaseConnection.php"))
+			while(!file_exists("custom/DatabaseConnection.php"))
 			{
 			    sleep(1);
 			}

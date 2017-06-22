@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>System Installation.php</title>
+	<?php include_once("includes/head.php");  ?>
 </head>
 <body>
 <!--

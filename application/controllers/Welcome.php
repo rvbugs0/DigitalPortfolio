@@ -3,21 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
+	 public function __construct()
+    {
+        parent:: __construct();
+        $this->load->model("Admin_model");
+    }
+
 	public function index()
 	{
 
@@ -28,6 +19,11 @@ class Welcome extends CI_Controller {
 				die("custom/tables.sql missing");
 			}
 			$this->load->view("Installation");
+			return;
+		}
+		if(!$this->Admin_model->getCount())
+		{
+			$this->load->view("CreateAdmin");
 			return;
 		}
 		$this->load->view('welcome_message');			
@@ -106,6 +102,32 @@ class Welcome extends CI_Controller {
             $done=false;
         }
         return $done;
+    }
+
+    function firstRun()
+    {
+    	$name="";
+		$email = "";
+		$password = "";
+		
+		if(!$this->input->post("adminName")) die("Admin name not specified");
+		else $name = trim($this->input->post("adminName"));
+
+		if(!$this->input->post("adminEmail")) die("Admin name not specified");
+		else $email = trim($this->input->post("adminEmail"));
+
+		if(!$this->input->post("adminPassword")) die("Admin name not specified");
+		else $password = trim($this->input->post("adminPassword"));
+
+		if($this->Admin_model->add($name,$email,$password))
+		{
+			echo "Admin Added";
+		}
+		else
+		{
+			echo "Failed to add Admin";
+		}
+
     }
 
 

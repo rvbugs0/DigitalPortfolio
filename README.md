@@ -12,7 +12,7 @@ $config['base_url'] = ''; -> $config['base_url'] = 'http://localhost:9090/digipo
 
 <hr>
 
-#Documentation
+# Documentation
 
 Upon copying the project files to server root, when the site is accessed, the program checks for existence of custom/DatabaseConnection.php file.
 

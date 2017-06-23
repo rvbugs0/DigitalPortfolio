@@ -134,7 +134,7 @@ class Welcome extends CI_Controller {
 
 		if($this->Admin_model->add($name,$email,$password))
 		{
-			echo "Admin Added";
+			redirect('/welcome', 'index');
 		}
 		else
 		{

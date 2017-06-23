@@ -6,7 +6,11 @@ class Welcome extends CI_Controller {
 	 public function __construct()
     {
         parent:: __construct();
-        $this->load->model("Admin_model");
+        if(file_exists("custom/DatabaseConnection.php"))
+        {
+	        $this->load->model("Admin_model");        	
+        }
+
     }
 
 	public function index()
@@ -87,18 +91,27 @@ class Welcome extends CI_Controller {
 			{
 			    sleep(1);
 			}
+			$oldContents=file_get_contents("application/config/database.php");
+           	$f=fopen("application/config/database.php","w");
+           	$oldContents = str_replace("#serverAddress#",$serverName,$oldContents);
+           	$oldContents = str_replace("#dbName#",$databaseName,$oldContents);
+           	$oldContents = str_replace("#dbUsername#",$username,$oldContents);
+           	$oldContents = str_replace("#dbPassword#",$password,$oldContents);
+            fputs($f,$oldContents);
+            fclose($f);
+			sleep(2);
             $c=null;
 	        $done=true;
         }
 
         catch(PDOException $pe)
         {
-			print $pe->getMessage(); // remove after testing
+			print $pe->getMessage()."<br/>"; // remove after testing
             $done=false;
         }
         catch(Exception $e)
         {
-			print $e->getMessage(); // remove after testing
+			print $e->getMessage()."<br/>"; // remove after testing
             $done=false;
         }
         return $done;

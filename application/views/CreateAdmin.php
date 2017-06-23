@@ -7,7 +7,7 @@
 
 <h1>New Admin</h1>
 
-<form action="<?php  echo base_url(); ?>index.php/welcome/firstrun">
+<form action="<?php  echo base_url(); ?>index.php/welcome/firstrun" method="post">
 	<table>
 		<tr>
 			<td>Admin Name</td>

@@ -24,7 +24,8 @@ class Admin_model extends CI_Model
 
     public function getCount()
     {
-    	return 0;
+        $this->db->from('Admin');
+        return $this->db->count_all_results();
     }
 
     public function add($name,$email,$password)
@@ -33,7 +34,7 @@ class Admin_model extends CI_Model
         $this->email  = trim($email);
         $this->password  = md5(trim($password));
         $this->db->insert('Admin', $this);
-    
+        return $this->db->insert_id();    
     }
 
 }

@@ -33,7 +33,7 @@ class Welcome extends CI_Controller {
 		$this->load->view('welcome_message');			
 	}
 
-	public function installTables()
+	public function installtables()
 	{
 
 		$serverAddress="";
@@ -80,10 +80,10 @@ class Welcome extends CI_Controller {
             fputs($f,"<"."?"."php\r\n");
             fputs($f,"class DatabaseConnection\r\n");
             fputs($f,"{\r\n");
-            fputs($f," public "."$"."serverAddress = ".$serverName.";\r\n");
-            fputs($f," public "."$"."dbName = ".$databaseName.";\r\n");
-            fputs($f," public "."$"."dbUsername = ".$username.";\r\n");
-            fputs($f," public "."$"."dbPassword = ".$password.";\r\n");
+            fputs($f," public "."$"."serverAddress = \"".$serverName."\";\r\n");
+            fputs($f," public "."$"."dbName = \"".$databaseName."\";\r\n");
+            fputs($f," public "."$"."dbUsername = \"".$username."\";\r\n");
+            fputs($f," public "."$"."dbPassword = \"".$password."\";\r\n");
             fputs($f,"}\r\n");
             fputs($f,"?".">");
             fclose($f);

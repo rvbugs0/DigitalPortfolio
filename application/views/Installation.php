@@ -4,7 +4,7 @@
 	<?php include_once("includes/head.php");  ?>
 </head>
 <body>
-<form action="<?php echo base_url();?>index.php/welcome/installtables" method="post"> 
+<form action="<?php echo base_url();?>index.php/welcome/installTables" method="post"> 
 <h1>Installation Form</h1>
 <table>
 	<tr>

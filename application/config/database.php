@@ -76,14 +76,19 @@ $query_builder = TRUE;
 
 
 
+$serverAddress = "#serverAddress#";
+$dbName = "#dbName#";
+$dbUsername = "#dbUsername#";
+$dbPassword = "#dbPassword#";
 
 
 
-$serverAddress = "localhost";
-$dbName = "digiport";
-$dbUsername = "digiportu";
-$dbPassword = "digiportp";
-
+/*
+$serverAddress = "#serverAddress#";
+$dbName = "#dbName#";
+$dbUsername = "#dbUsername#";
+$dbPassword = "#dbPassword#";
+*/
 
 
 
